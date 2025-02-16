@@ -1,0 +1,10 @@
+services:
+  static-file-server:
+    image: tomcat:8.5.23-alpine
+    container_name: static-file-server
+    ports:
+      - ${PORT}:8080
+    restart: always
+    volumes:
+      - ${ROOT_FOLDER}:/usr/local/tomcat/webapps/ROOT
+      - ./config/web.xml:/usr/local/tomcat/conf/web.xml
