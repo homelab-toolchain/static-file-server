@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.0.0...v1.1.0) (2025-02-22)
+
+
+### Features
+
+* update readme ([4b9e0a0](https://github.com/homelab-toolchain/static-file-server/commit/4b9e0a061e6b9c77f4152b2590350a0ad4e8b93c))
+
 # 1.0.0 (2025-02-22)
 
 
