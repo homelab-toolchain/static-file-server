@@ -26,8 +26,8 @@ curl -sSL https://raw.githubusercontent.com/homelab-toolchain/static-file-server
 
 # Screenshots
  
-**Landing Page (you have defined)**:
-![screenshot_1](https://github.com/user-attachments/assets/456573f3-0172-4870-a616-59672155a2a6)
+**Landing Page (home folder you have defined)**:
+![screenshot_1](https://github.com/user-attachments/assets/69a3c53f-6fd6-4cc0-a95b-dc1dbc95aa1f)
 
 **Possibility to get the URL of the file:**
-![screenshot_2](https://github.com/user-attachments/assets/146c08e0-3f00-45e6-aa31-f5ac56549c44)
+![screenshot_2](https://github.com/user-attachments/assets/c4d1bee7-7247-420f-8610-ec9439f7ada1)
