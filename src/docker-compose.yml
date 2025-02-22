@@ -1,0 +1,9 @@
+services:
+  static-file-server-dev:
+    container_name: static-file-server-dev
+    build:
+      context: .
+    ports:
+      - 8181:8080
+    volumes:
+      - ./test-root-folder:/home
