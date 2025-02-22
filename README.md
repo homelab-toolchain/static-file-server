@@ -12,7 +12,13 @@ This script installs a static file server that allows you to browse files and qu
 apt-get update -y && apt-get install curl -y
 ```
 
-# How to Execute
+# How to Install 
+
+**General:** <br>
+* `homeFolder` specifies the starting folder for file browsing
+* `port` sets the port on which the static file server will be accessible
+
+## Shell Script
 
 Run the following command with your parameters (replace `port` and `homeFolder` with your values):
 
@@ -20,13 +26,22 @@ Run the following command with your parameters (replace `port` and `homeFolder` 
 curl -sSL https://raw.githubusercontent.com/homelab-toolchain/static-file-server/refs/heads/main/install.sh | bash -s port=8080 homeFolder=/DATA
 ```
 
-**Note:** <br>
-* `homeFolder` specifies the starting folder for file browsing
-* `port` sets the port on which the static file server will be accessible
+## Manual
+
+Run the following command with your parameters (replace `port` and `homeFolder` with your values):
+
+```
+docker run -d \
+  --name static-file-server \
+  -p ${PORT}:8080 \
+  --restart always \
+  -v ${HOME_FOLDER}:/home \
+  ghcr.io/homelab-toolchain/static-file-server:latest
+```
 
 # How to Upgrade
 
-An upgrade script was automatically created during the installation, which can be executed with the following command: 
+An upgrade script was automatically created during installation and can be executed with the following command, but only if the installation was performed using the shell script variant: 
 
 ```
 source /homelab-toolchain/static-file-server/upgrade.sh
