@@ -25,7 +25,7 @@ curl -sSL https://raw.githubusercontent.com/homelab-toolchain/static-file-server
 * `port` sets the port on which the static file server will be accessible
 
 # Screenshots
-
+ 
 **Landing Page (you have defined)**:
 ![screenshot_1](https://github.com/user-attachments/assets/456573f3-0172-4870-a616-59672155a2a6)
 
