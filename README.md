@@ -24,6 +24,14 @@ curl -sSL https://raw.githubusercontent.com/homelab-toolchain/static-file-server
 * `homeFolder` specifies the starting folder for file browsing
 * `port` sets the port on which the static file server will be accessible
 
+# How to Upgrade
+
+An upgrade script was automatically created during the installation, which can be executed with the following command: 
+
+```
+source /homelab-toolchain/static-file-server/upgrade.sh
+```
+
 # Screenshots
  
 **Landing Page (home folder you have defined)**:

@@ -59,6 +59,13 @@ if [[ ! -f "$COMPOSE_FILE" ]]; then
     exit 1
 fi
 
+UPGRADE_FILE="upgrade.sh"
+wget -O $UPGRADE_FILE https://raw.githubusercontent.com/homelab-toolchain/static-file-server/refs/heads/main/upgrade.sh
+if [[ ! -f "$UPGRADE_FILE" ]]; then
+    echo "The file $UPGRADE_FILE was not found."
+    exit 1
+fi
+
 touch /homelab-toolchain/static-file-server/.env
 {
     echo "PORT=$port_to_set"
