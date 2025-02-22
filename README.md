@@ -14,14 +14,14 @@ apt-get update -y && apt-get install curl -y
 
 # How to Execute
 
-Run the following command with your parameters (replace `port` and `rootFolder` with your values):
+Run the following command with your parameters (replace `port` and `homeFolder` with your values):
 
 ```
-curl -sSL https://raw.githubusercontent.com/homelab-toolchain/static-file-server/refs/heads/main/install.sh | bash -s port=8080 rootFolder=/DATA
+curl -sSL https://raw.githubusercontent.com/homelab-toolchain/static-file-server/refs/heads/main/install.sh | bash -s port=8080 homeFolder=/DATA
 ```
 
 **Note:** <br>
-* `rootFolder` specifies the starting folder for file browsing
+* `homeFolder` specifies the starting folder for file browsing
 * `port` sets the port on which the static file server will be accessible
 
 # Screenshots

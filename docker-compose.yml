@@ -1,0 +1,9 @@
+services:
+  static-file-server:
+    image: ghcr.io/homelab-toolchain/static-file-server:latest
+    container_name: static-file-server
+    ports:
+      - ${PORT}:8080
+    restart: always
+    volumes:
+      - ${HOME_FOLDER}:/home

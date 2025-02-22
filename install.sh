@@ -45,11 +45,11 @@ else
     port_to_set=$(get_value "port" "$@")
 fi
 
-if ! is_available "rootFolder" "$@"; then
-    echo "ERROR: Please provide ROOT_FOLDER to be used."
+if ! is_available "homeFolder" "$@"; then
+    echo "ERROR: Please provide HOME_FOLDER to be used."
     exit 1
 else
-    root_folder_to_set=$(get_value "rootFolder" "$@")
+    home_folder_to_set=$(get_value "homeFolder" "$@")
 fi
 
 COMPOSE_FILE="docker-compose.yml" 
@@ -59,17 +59,10 @@ if [[ ! -f "$COMPOSE_FILE" ]]; then
     exit 1
 fi
 
-CONFIG_FILE="./config/web.xml"
-wget -O $CONFIG_FILE https://raw.githubusercontent.com/homelab-toolchain/static-file-server/refs/heads/main/config/web.xml
-if [[ ! -f "$CONFIG_FILE" ]]; then
-    echo "The file $CONFIG_FILE was not found."
-    exit 1
-fi
-
 touch /homelab-toolchain/static-file-server/.env
 {
     echo "PORT=$port_to_set"
-    echo "ROOT_FOLDER=$root_folder_to_set"
+    echo "HOME_FOLDER=$home_folder_to_set"
 } >> /homelab-toolchain/static-file-server/.env
 
 docker compose up -d
