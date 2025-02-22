@@ -52,7 +52,7 @@ else
     root_folder_to_set=$(get_value "rootFolder" "$@")
 fi
 
-COMPOSE_FILE="docker-compose.yml"
+COMPOSE_FILE="docker-compose.yml" 
 wget -O $COMPOSE_FILE https://raw.githubusercontent.com/homelab-toolchain/static-file-server/refs/heads/main/docker-compose.yml
 if [[ ! -f "$COMPOSE_FILE" ]]; then
     echo "The file $COMPOSE_FILE was not found."
