@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.1.0...v1.2.0) (2025-02-22)
+
+
+### Features
+
+* add release docker image ([bff5a38](https://github.com/homelab-toolchain/static-file-server/commit/bff5a386c9b41095b027651018ce54c9225c95d9))
+
 # [1.1.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.0.0...v1.1.0) (2025-02-22)
 
 
