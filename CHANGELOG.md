@@ -1,3 +1,12 @@
+# [1.3.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.2.0...v1.3.0) (2025-02-22)
+
+
+### Features
+
+* adapt install script ([06d0c84](https://github.com/homelab-toolchain/static-file-server/commit/06d0c84c3e307e63b641c85781d05c173cae179e))
+* introduce upgrade script ([19769d8](https://github.com/homelab-toolchain/static-file-server/commit/19769d8aa79cd1bf80501e760e17eb557e04066a))
+* update screenshots ([808b43b](https://github.com/homelab-toolchain/static-file-server/commit/808b43bea59f137ce4438d5ef9c16964a6a2e661))
+
 # [1.2.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.1.0...v1.2.0) (2025-02-22)
 
 
