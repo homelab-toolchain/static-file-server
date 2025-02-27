@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.3.0...v1.4.0) (2025-02-27)
+
+
+### Features
+
+* ignore mac os system files ([d1d8d00](https://github.com/homelab-toolchain/static-file-server/commit/d1d8d0087bdb968d238d7a36f67577459b94857e))
+
 # [1.3.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.2.0...v1.3.0) (2025-02-22)
 
 
