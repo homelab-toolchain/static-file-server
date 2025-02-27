@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.5.0...v1.6.0) (2025-02-27)
+
+
+### Features
+
+* use alpine image ([cb0a4f2](https://github.com/homelab-toolchain/static-file-server/commit/cb0a4f24c030c74511bb847df4d9ff3372a860f3))
+
 # [1.5.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.4.0...v1.5.0) (2025-02-27)
 
 
