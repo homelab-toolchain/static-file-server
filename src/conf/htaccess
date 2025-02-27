@@ -411,13 +411,3 @@ RewriteEngine On
 # Redirect from "/" to "/home"
 RewriteCond %{REQUEST_URI} ^/$
 RewriteRule ^$ /home [R=301,L]
-
-# Hide macOS files
-<FilesMatch "^\._">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-<FilesMatch "^\.DS_Store">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
