@@ -1,34 +1,12 @@
-name: Manual Release
+name: Manual Release Image
 
 on:
   workflow_dispatch:  
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install Dependencies
-        run: npm install -g semantic-release @semantic-release/changelog @semantic-release/git
-
-      - name: Run Semantic Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
-
   docker:
-    needs: release  
     runs-on: ubuntu-latest
+    
     permissions:
       contents: read
       packages: write
@@ -42,7 +20,7 @@ jobs:
       - name: Log in to GitHub Container Registry (GHCR)
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Get latest version tag
+      - name: Get Latest Tag
         id: get_version
         run: |
           VERSION=$(git describe --tags --abbrev=0)
