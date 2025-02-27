@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.4.0...v1.5.0) (2025-02-27)
+
+
+### Features
+
+* fix problems ([af5833b](https://github.com/homelab-toolchain/static-file-server/commit/af5833b5e76231501c64b5b4b4abb3d5ef6adca0))
+
 # [1.4.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.3.0...v1.4.0) (2025-02-27)
 
 
