@@ -1,0 +1,8 @@
+name: Release (Manually)
+
+on:
+  workflow_dispatch:  
+
+jobs:
+  task:
+    uses: homelab-toolchain/.github_shared/.github/workflows/create_tag.yml@main
