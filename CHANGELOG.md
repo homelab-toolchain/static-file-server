@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.6.0...v1.7.0) (2025-12-10)
+
+
+### Features
+
+* extend the list of ignored system files ([592e65f](https://github.com/homelab-toolchain/static-file-server/commit/592e65f001da11389ac3d9cef7fb0f23639afa9b))
+
 # [1.6.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.5.0...v1.6.0) (2025-02-27)
 
 
