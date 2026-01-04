@@ -1,0 +1,134 @@
+name: Upgrade httpd Version
+
+on:
+  schedule:
+    - cron: '0 8 * * *' # every day 8am
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set Git Identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
+      - name: Upgrade Version
+        id: upgrade
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          DOCKERFILE="src/Dockerfile"
+
+          echo "Fetching latest httpd LTS release tag..."
+          LATEST_TAG="$(curl -s https://api.github.com/repos/apache/httpd/tags?per_page=100 \
+          | jq -r '
+          [ .[]
+              | .name as $n
+                | select($n | test("^\\d+\\.\\d+\\.\\d+$"))          # nur 2.4.66
+                | select($n | test("candidate"; "i") | not)          # kein candidate
+                | {name:$n, v: ($n|split(".")|map(tonumber))}
+                ]
+                | sort_by(.v) | last | .name
+                ')"
+
+          if [ -z "$LATEST_TAG" ] || [ "$LATEST_TAG" = "null" ]; then
+            echo "Could not determine latest LTS tag from GitHub." >&2
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+
+          LATEST_VERSION="${LATEST_TAG#v}-alpine"
+          echo "Latest version: $LATEST_VERSION"
+
+          CURRENT_IMAGE_LINE="$(grep -E '^FROM httpd:' "$DOCKERFILE" | head -n1 || true)"
+          if [ -z "$CURRENT_IMAGE_LINE" ]; then
+            echo "Could not find a httpd image line in $DOCKERFILE" >&2
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+
+          CURRENT_VERSION="$(echo "$CURRENT_IMAGE_LINE" | sed -E 's/.*httpd:([^"'"'"'[:space:]]+).*/\1/')"
+          echo "Current version in $DOCKERFILE: $CURRENT_VERSION"
+
+          if [ "$CURRENT_VERSION" = "$LATEST_VERSION" ]; then
+            echo "No change needed. Skipping remaining steps."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "Updating $DOCKERFILE to $LATEST_VERSION ..."
+          sed -E -i "s|^(FROM[[:space:]]+httpd:)[^[:space:]]+|\1${LATEST_VERSION}|" "$DOCKERFILE"
+
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "new_version=$LATEST_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Docker
+        if: steps.upgrade.outputs.changed == 'true'
+        uses: docker/setup-docker-action@e61617a16c407a86262fb923c35a616ddbe070b3 # v4
+
+      - name: Run Docker Container
+        if: steps.upgrade.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+          docker compose -f src/docker-compose.yml up -d
+
+      - name: Install httpie
+        if: steps.upgrade.outputs.changed == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y httpie
+
+      - name: Test
+        if: steps.upgrade.outputs.changed == 'true'
+        run: |
+          resp="$(http --ignore-stdin --verify=no GET http://localhost:8080/home/)"
+          echo "$resp" | grep -q 'folder1' && echo "$resp" | grep -q 'folder2'
+
+      - name: Commit & Push
+        if: steps.upgrade.outputs.changed == 'true'
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
+        run: |
+          set -euo pipefail
+
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "Nothing to commit and push."
+            exit 0
+          fi
+
+          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+
+          LAST_SUBJECT="$(git log -1 --pretty=%s || echo "")"
+          BASE_SUBJECT="feat(bot): use latest httpd-alpine version"
+
+          if [ "$LAST_SUBJECT" = "$BASE_SUBJECT" ]; then
+            echo "Last commit has same subject -> creating fixup commit."
+            git commit --amend -m "$BASE_SUBJECT"
+            git push --force-with-lease origin HEAD
+          else
+            git commit -m "$BASE_SUBJECT"
+            git push origin HEAD
+          fi

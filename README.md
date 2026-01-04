@@ -1,4 +1,13 @@
-# Static File Server
+<h1 align="center">Simple Static File Server</h1>
+<p align="center">
+<a href="#">
+<img src="https://img.shields.io/github/last-commit/homelab-toolchain/static-file-server/main?style=for-the-badge&label=last%20update&display_timestamp=committer"/>
+</a>
+</p>
+
+---
+
+# General
 
 Containerized static file server for quickly browsing a host folder and copying direct links to files.
 
