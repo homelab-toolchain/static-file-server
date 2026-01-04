@@ -1,4 +1,4 @@
-FROM httpd:2.4-alpine
+FROM httpd:2.4.66-alpine
 
 RUN rm /usr/local/apache2/htdocs/index.html
 
