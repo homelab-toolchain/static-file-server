@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.7.0...v1.8.0) (2026-01-04)
+
+
+### Features
+
+* **bot:** use latest httpd-alpine version ([cc6f775](https://github.com/homelab-toolchain/static-file-server/commit/cc6f77564e379874ce009caf2282bcfaa932b1d1))
+
 # [1.7.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.6.0...v1.7.0) (2025-12-10)
 
 
