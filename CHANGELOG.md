@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.8.0...v1.9.0) (2026-01-06)
+
+
+### Features
+
+* add note ([e8b2d9f](https://github.com/homelab-toolchain/static-file-server/commit/e8b2d9fe112de8078ac490adfb26e548cd5d7836))
+
 # [1.8.0](https://github.com/homelab-toolchain/static-file-server/compare/v1.7.0...v1.8.0) (2026-01-04)
 
 
