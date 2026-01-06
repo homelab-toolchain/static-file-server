@@ -1,6 +1,8 @@
 name: Upgrade httpd Version
 
 on:
+  schedule:
+    - cron: '0 8 * * *' # every day 8am
   workflow_dispatch:
 
 permissions:
@@ -131,12 +133,3 @@ jobs:
             git commit -m "$BASE_SUBJECT"
             git push origin HEAD
           fi
-
-      - name: Cancel Current Job
-        if: steps.upgrade.outputs.changed == 'false'
-        uses: andymckay/cancel-action@a955d435292c0d409d104b57d8e78435a93a6ef1 # v0.5
-
-      - name: Wait for Cancellation
-        if: steps.upgrade.outputs.changed == 'false'
-        shell: bash
-        run: while true; do echo "Waiting for job to be cancelled"; sleep 5; done
