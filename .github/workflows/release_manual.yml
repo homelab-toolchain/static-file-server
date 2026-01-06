@@ -4,5 +4,9 @@ on:
   workflow_dispatch:  
 
 jobs:
-  task:
-    uses: homelab-toolchain/.github_shared/.github/workflows/create_tag.yml@main
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Dependencies
+        run: echo "The release process will be triggered."

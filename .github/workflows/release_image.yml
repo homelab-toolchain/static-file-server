@@ -2,7 +2,7 @@ name: Deploy Image
 
 on:
   workflow_run:
-    workflows: ["Release (Manually)", "Upgrade httpd Version"]
+    workflows: ["Create Tag"]
     types:
       - completed
 
